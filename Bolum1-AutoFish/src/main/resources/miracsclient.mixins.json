@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"package": "com.miracsclient.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+      "ExampleMixin",
+      "FishingBobberEntityMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
