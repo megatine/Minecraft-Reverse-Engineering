@@ -4,6 +4,7 @@ Bu depo, Minecraft sunucu-istemci (client-server) iletişimini analiz etmek ve a
 
 ## 📂 Bölümler
 * **[Bölüm 1: Auto Fish (Paket Analizi ve Otomasyon)](./Bolum1-AutoFish)** 📺 **[YouTube'da İzle](https://www.youtube.com/watch?v=P_RFgd3CDeI)**
+* **[Bölüm 2: Boat Fly (Kaynak Kod Analizi ve Sunucu Bypass)](./Bolum2-Fly)** 📺 **[YouTube'da İzle](https://www.youtube.com/watch?v=1ZTNk3gymXo)**
 
 ## 🛠️ Kurulum ve Derleme
 Bu repodaki projeler Fabric API üzerine inşa edilmiştir. Kodu kendi ortamınızda derlemek için aşağıdaki adımları izleyin:
