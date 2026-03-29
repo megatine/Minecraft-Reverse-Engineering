@@ -6,7 +6,9 @@ Bu depo, Minecraft sunucu-istemci (client-server) iletişimini analiz etmek ve a
 * **[Bölüm 1: Auto Fish (Paket Analizi ve Otomasyon)](./Bolum1-AutoFish)** 📺 **[YouTube'da İzle](https://www.youtube.com/watch?v=P_RFgd3CDeI)**
 * **[Bölüm 2: Boat Fly (Kaynak Kod Analizi ve Sunucu Bypass)](./Bolum2-Fly)** 📺 **[YouTube'da İzle](https://www.youtube.com/watch?v=V1jpkKWJkzQ)**
 * **[Bölüm 3: ESP (Dinamik vs Statik Kod Analizi)](./Bolum3-ESP)** 📺 **[YouTube'da İzle](https://www.youtube.com/watch?v=u8E9Nm1zN3c)**
-
+* **[Bölüm 4: OP Exploit (Sunucu Paneli Zafiyeti)](./Bolum4-OP)** 📺 **[YouTube'da İzle](https://www.youtube.com/watch?v=PtnQrsV4sz8)**
+* **[Bölüm 5: Reach Hack (Ağ Paketi Manipülasyonu ve TP-Aura)](./Bolum5-Reach)** 📺 **[YouTube'da İzle](https://www.youtube.com/watch?v=cJI1h0lCksA)**
+  
 ## 🛠️ Kurulum ve Derleme
 Bu repodaki projeler Fabric API üzerine inşa edilmiştir. Kodu kendi ortamınızda derlemek için aşağıdaki adımları izleyin:
 
