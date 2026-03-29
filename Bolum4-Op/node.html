@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cracknos | Server Console</title>
+<style>
+    body {
+        background-color: #1a1b1c;
+        color: #e0e0e0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .navbar {
+        background-color: #121314;
+        padding: 15px 30px;
+        font-size: 22px;
+        font-weight: 900;
+        color: #ffffff;
+        border-bottom: 3px solid #287bff;
+        letter-spacing: 1px;
+    }
+    .navbar span {
+        color: #287bff;
+    }
+    .container {
+        display: flex;
+        max-width: 1400px;
+        margin: 30px auto;
+        gap: 25px;
+        height: calc(100vh - 140px);
+        padding: 0 20px;
+    }
+    .console-wrapper {
+        flex: 3;
+        display: flex;
+        flex-direction: column;
+        background-color: #222325;
+        border-radius: 6px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        border: 1px solid #2d2d2d;
+        overflow: hidden;
+    }
+    .console-header {
+        background-color: #191a1c;
+        padding: 12px 20px;
+        font-size: 15px;
+        font-weight: bold;
+        border-bottom: 1px solid #2d2d2d;
+        display: flex;
+        justify-content: space-between;
+    }
+    #console-output {
+        flex: 1;
+        padding: 15px 20px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Consolas', monospace;
+        font-size: 13px;
+        line-height: 1.5;
+        color: #cccccc;
+    }
+    .input-area {
+        display: flex;
+        padding: 15px;
+        background-color: #191a1c;
+        border-top: 1px solid #2d2d2d;
+    }
+    #command-input {
+        flex: 1;
+        background-color: #121314;
+        color: #ffffff;
+        border: 1px solid #333333;
+        padding: 12px;
+        font-family: 'Consolas', monospace;
+        font-size: 14px;
+        outline: none;
+        border-radius: 4px;
+    }
+    #command-input:focus {
+        border-color: #287bff;
+    }
+    #send-btn {
+        background-color: #287bff;
+        color: #ffffff;
+        border: none;
+        padding: 0 25px;
+        margin-left: 15px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 4px;
+    }
+    .sidebar {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+    .box {
+        background-color: #222325;
+        border-radius: 6px;
+        padding: 20px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+        border: 1px solid #2d2d2d;
+    }
+    .box-title {
+        font-weight: bold;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #888;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 8px;
+    }
+    .status-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: 15px;
+    }
+    .status-online {
+        color: #2ecc71;
+        font-weight: bold;
+    }
+    .player-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .player-list li {
+        padding: 10px 0;
+        border-bottom: 1px solid #2d2d2d;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 15px;
+    }
+    .player-list li:last-child {
+        border-bottom: none;
+    }
+    .player-head {
+        width: 28px;
+        height: 28px;
+        background-color: #444;
+        border-radius: 4px;
+    }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    CRACK<span>NOS</span>
+</div>
+
+<div class="container">
+    <div class="console-wrapper">
+        <div class="console-header">
+            <span>Server Console</span>
+            <span class="status-online">● Online</span>
+        </div>
+        <div id="console-output"></div>
+        <div class="input-area">
+            <input type="text" id="command-input" autocomplete="off" spellcheck="false" autofocus>
+            <button id="send-btn">Enter</button>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="box">
+            <div class="box-title">Server Status</div>
+            <div class="status-row">
+                <span>Status</span>
+                <span class="status-online">Online</span>
+            </div>
+            <div class="status-row">
+                <span>Players</span>
+                <span>1/20</span>
+            </div>
+            <div class="status-row">
+                <span>Software</span>
+                <span>Paper 1.20.4</span>
+            </div>
+            <div class="status-row">
+                <span>TPS</span>
+                <span style="color: #2ecc71;">20.00</span>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="box-title">Players (1)</div>
+            <ul class="player-list">
+                <li>
+                    <div class="player-head" style="background: url('https://crafatar.com/avatars/8667ba71b85a4004af54457a9734eed7?size=28&overlay')"></div>
+                    MiracMirza
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+const output = document.getElementById('console-output');
+const input = document.getElementById('command-input');
+const btn = document.getElementById('send-btn');
+const playerListEl = document.querySelector('.player-list');
+const playerCountEl = document.querySelector('.status-row:nth-child(3) span:nth-child(2)');
+const ws = new WebSocket('ws://localhost:8080');
+
+let players = new Set();
+
+const updatePlayerUI = () => {
+    playerListEl.innerHTML = '';
+    playerCountEl.textContent = `${players.size}/20`;
+    players.forEach(player => {
+        const li = document.createElement('li');
+        const imgDiv = document.createElement('div');
+        imgDiv.className = 'player-head';
+        imgDiv.style.background = `url('https://minotar.net/helm/${player}/28.png')`;
+        imgDiv.style.backgroundSize = 'cover';
+        li.appendChild(imgDiv);
+        li.appendChild(document.createTextNode(' ' + player));
+        playerListEl.appendChild(li);
+    });
+};
+
+updatePlayerUI();
+
+ws.onmessage = (event) => {
+    const line = event.data.toString();
+    const div = document.createElement('div');
+    
+    div.innerHTML = line;
+    
+    output.appendChild(div);
+    output.scrollTop = output.scrollHeight;
+
+    const joinMatch = line.match(/:\s([a-zA-Z0-9_]{2,16})\sjoined the game/);
+    if (joinMatch) {
+        players.add(joinMatch[1]);
+        updatePlayerUI();
+    }
+
+    const leaveMatch = line.match(/:\s([a-zA-Z0-9_]{2,16})\sleft the game/);
+    if (leaveMatch) {
+        players.delete(leaveMatch[1]);
+        updatePlayerUI();
+    }
+};
+
+const sendCmd = () => {
+    const val = input.value.trim();
+    if(val !== "") {
+        ws.send(val);
+        input.value = '';
+    }
+};
+
+btn.onclick = sendCmd;
+input.onkeypress = (e) => {
+    if(e.key === 'Enter') sendCmd();
+};
+</script>
+
+</body>
+</html>
